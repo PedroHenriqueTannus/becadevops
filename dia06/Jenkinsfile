@@ -10,9 +10,13 @@ pipeline {
         stage("Sonar:Quality") {     
             steps {
                 withSonarQubeEnv('sonar')
-                sh '$MVN -f pom.xml clean package sonar:sonar -Dsonar.projectKey=BecaDevOps:master' 
+                sh "'${MVN}' -f pom.xml clean package sonar:sonar"+
+                " -Dsonar.login=admin"+
+                " -Dsonar.password=admin"+
+                " -Dsonar.projectKey=BecaDevOps:master"
             }
         }
+        
         
     }
 }
